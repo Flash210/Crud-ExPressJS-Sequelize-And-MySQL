@@ -92,28 +92,29 @@ router.put("/todos/:id", async (req, res) => {
 
 
 // !Delete Todo By Id
-/*
-router.delete("/todos/:id", async(req, res) => {
+
+router.delete("/todos/:id", async (req, res) => {
+    try {
+      const todo = await Todo.findOne({
+        where: {
+          id: req.params.id,
+        },
+      });
   
-   const todo = Todo.findOne({
-    where: {
-      id: req.params.id,
-    },
-});
-
-    await todo.destroy();
-   try {
-    res.status(204).json({ todo });
-    res.send("Todo deleted successfully");
+      if (!todo) {
+        return res.status(404).json({ error: 'Todo not found' });
+      }
+  
+      await todo.destroy();
+  
+      res.status(204).send("Todo deleted successfully");
+      
     } catch (err) {
-
-    res.status(400).json({ err });
+      console.error(err);
+      res.status(500).json({ error: 'Internal server error' });
     }
+  });
 
-
-
-});
-*/
 
 
 
