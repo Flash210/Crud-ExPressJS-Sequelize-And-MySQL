@@ -11,7 +11,7 @@ const sequelize = new Sequelize('nodecrud', 'root', '', {
   
 });
 
-const connect = async () => {
+const connectToDataBase = async () => {
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
@@ -19,6 +19,5 @@ const connect = async () => {
     console.error('Unable to connect to the database:', error);
   }
 }
-connect();
 
-module.exports = sequelize; 
+module.exports = {sequelize,connectToDataBase}; 
